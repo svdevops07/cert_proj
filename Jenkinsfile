@@ -23,7 +23,15 @@ pipeline {
             }
         }
 
-        stage('Terraform Action') {
+        stage('Terraform Plan') {
+            steps {
+//                echo "Terraform action is ---> ${action}"
+//                sh 'terraform ${action} --auto-approve'
+                sh 'terraform plan'
+            }
+        }
+
+        stage('Terraform Apply') {
             steps {
 //                echo "Terraform action is ---> ${action}"
 //                sh 'terraform ${action} --auto-approve'
