@@ -10,7 +10,7 @@ pipeline {
 
         stage('Copy file with variables') {
             steps {
-                sh 'cp /home/ann/proj/variables.tf /var/lib/jenkins/workspace/proj_pipeline/'
+                sh 'cp /home/ann/proj/variables.tf /var/lib/jenkins/workspace/proj_pipeline_main/'
             }
         }
 
