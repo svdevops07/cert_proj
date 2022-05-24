@@ -16,8 +16,8 @@ pipeline {
 
         stage('Terraform init') {
             steps {
-                sh "cat ~/.terraformrc"
-                sh "./terraform init"
+                sh "cat /root/.terraformrc"
+                sh "/bin/terraform init"
 //                sh 'terraform init'
             }
         }
