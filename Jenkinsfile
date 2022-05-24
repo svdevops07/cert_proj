@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+        stage('Copy file with variables') {
+            steps {
+                sh 'cp /home/ann/proj/variables.tf /var/lib/jenkins/workspace/proj_pipeline/'
+            }
+        }
+
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
