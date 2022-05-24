@@ -9,14 +9,14 @@ terraform {
 
 provider "yandex" {
   # Configuration options
-  token = var.token
-  cloud_id = var.cloud_id
+  token     = var.token
+  cloud_id  = var.cloud_id
   folder_id = var.folder_id
   zone      = var.zone
 }
 
-resource "yandex_compute_instance" "vm-1" {
-  name = "terraform1"
+resource "yandex_compute_instance" "vm1-build" {
+  name = "vm1-build"
 
   resources {
     cores  = 2
@@ -25,12 +25,12 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8irfoscugmpsoanefh"
+      image_id = var.image_id
     }
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
+    subnet_id = yandex_vpc_subnet.subnet-2.id
     nat       = true
   }
 
@@ -39,8 +39,8 @@ resource "yandex_compute_instance" "vm-1" {
   }
 }
 
-resource "yandex_compute_instance" "vm-2" {
-  name = "terraform2"
+resource "yandex_compute_instance" "vm2-prod" {
+  name = "vm2-prod"
 
   resources {
     cores  = 4
@@ -49,12 +49,12 @@ resource "yandex_compute_instance" "vm-2" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8irfoscugmpsoanefh"
+      image_id = var.image_id
     }
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
+    subnet_id = yandex_vpc_subnet.subnet-2.id
     nat       = true
   }
 
@@ -63,14 +63,14 @@ resource "yandex_compute_instance" "vm-2" {
   }
 }
 
-resource "yandex_vpc_network" "network-1" {
-  name = "network1"
+resource "yandex_vpc_network" "network-2" {
+  name = "network2"
 }
 
-resource "yandex_vpc_subnet" "subnet-1" {
-  name           = "subnet1"
+resource "yandex_vpc_subnet" "subnet-2" {
+  name           = "subnet2"
   zone           = var.zone
-  network_id     = yandex_vpc_network.network-1.id
+  network_id     = yandex_vpc_network.network-2.id
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
